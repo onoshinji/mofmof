@@ -15,26 +15,39 @@
     <%= form.label :名前 %>
     <%= form.text_field :name %>
     <%= form.label :賃料 %>
-    <%= form.number_field :rent %>
+    <%= form.number_field :rent %><span>円</span>
     <%= form.label :住所 %>
     <%= form.text_field :address %>
     <%= form.label :築年数 %>
-    <%= form.number_field :age %>
+    <%= form.number_field :age %><span>年</span>
     <%= form.label :備考 %>
     <%= form.text_area :remarks %>
   </div>
-  <div class = "nested_form">
-    <%= form.fields_for :nearest_station do |s| %>
-    <%= s.label :路線 %>
-    <%= s.text_field :route %>
-    <%= s.label :駅名 %>
-    <%= s.text_field :station %>
-    <%= s.label :徒歩でかかる時間 %>
-    <%= s.text_field :minutes_walk %>
-
-    <% end %>
-    </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <p>------------------------------------------------</p>
+    <h3>最寄り駅１</h3>
+      <div class = "nested_form">
+        <%= form.fields_for :nearest_station do |s| %>
+        <%= s.label :路線 %>
+        <%= s.text_field :route %>
+        <%= s.label :駅名 %>
+        <%= s.text_field :station %>
+        <%= s.label :徒歩でかかる時間 %>
+        <%= s.text_field :minutes_walk %><span>分</span>
+        <% end %>
+      </div>
+      <br>
+      <h3>最寄り駅２</h3>
+      <div class = "nested_form">
+        <%= form.fields_for :nearest_station do |s| %>
+        <%= s.label :路線 %>
+        <%= s.text_field :route %>
+        <%= s.label :駅名 %>
+        <%= s.text_field :station %>
+        <%= s.label :徒歩でかかる時間 %>
+        <%= s.text_field :minutes_walk %><span>分</span>
+        <% end %>
+      </div>
+      <div class="actions">
+        <%= form.submit value = "登録する"%>
+      </div>
 <% end %>

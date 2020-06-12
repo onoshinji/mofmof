@@ -2,7 +2,6 @@
   <% if property.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
-
       <ul>
       <% property.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :名前 %>
     <%= form.text_field :name %>
@@ -24,7 +22,9 @@
     <%= form.text_area :remarks %>
   </div>
     <p>------------------------------------------------</p>
-    <h3>最寄り駅１</h3>
+    <%  i = 1 %>
+    <% 2.times do %>
+    <h3><%= "最寄り駅#{i}" %></h3>
       <div class = "nested_form">
         <%= form.fields_for :nearest_stations do |s| %>
         <%= s.label :路線 %>
@@ -34,19 +34,10 @@
         <%= s.label :徒歩でかかる時間 %>
         <%= s.text_field :minutes_walk %><span>分</span>
         <% end %>
+        <% i += 1%>
       </div>
       <br>
-      <h3>最寄り駅２</h3>
-      <div class = "nested_form">
-        <%= form.fields_for :nearest_stations do |s| %>
-        <%= s.label :路線 %>
-        <%= s.text_field :route %>
-        <%= s.label :駅名 %>
-        <%= s.text_field :station %>
-        <%= s.label :徒歩でかかる時間 %>
-        <%= s.text_field :minutes_walk %><span>分</span>
-        <% end %>
-      </div>
+      <% end %>
       <div class="actions">
         <%= form.submit value = "登録する"%>
       </div>

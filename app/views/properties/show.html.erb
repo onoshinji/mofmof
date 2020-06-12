@@ -9,23 +9,20 @@
       <p><strong>築年数:</strong>
         <%= "#{@property.age}年" %></p>
         <p><strong>備考:</strong>
-          <%= @property.remarks%>
+          <%= @property.remarks%></p>
           <%# 保存したときに配列に格納されているので番号で取り出している %>
-
-          <p><strong>路線1:</strong>
-            <%= @nearest_stations[0].route %></p>
+          <h4><%= "#{@nearest_stations.count}つの最寄り駅" %></h4>
+          <% i = 0 %>
+          <% @nearest_stations.count.times do %>
+          <p><strong><%= "路線#{i+1}"%>:</strong>
+            <%= @nearest_stations[i].route %></p>
             <p><strong>駅名:</strong>
-              <%= @nearest_stations[0].station %></p>
+              <%= @nearest_stations[i].station %></p>
               <p><strong>徒歩でかかる時間:</strong>
-                <%= @nearest_stations[0].minutes_walk + "分"%></p>
+                <%= @nearest_stations[i].minutes_walk + "分"%></p>
+                <% i+= 1 %>
+                <% end %>
 
-                <p><strong>路線2:</strong>
-                  <%= @nearest_stations[1].route %></p>
-                  <p><strong>駅名:</strong>
-                    <%= @nearest_stations[1].station %></p>
-                    <p><strong>徒歩でかかる時間:</strong>
-                      <%= @nearest_stations[1].minutes_walk + "分"%></p>
-
-                      <%# この下の行で、引数にインスタンス変数を持たせることでpropertyデータを取り入れている %>
-                      <%= link_to '物件情報を再登録', edit_property_path(@property) %> |
-                      <%= link_to '戻る', properties_path %>
+                <%# この下の行で、引数にインスタンス変数を持たせることでpropertyデータを取り入れている %>
+                <%= link_to '物件情報を再登録', edit_property_path(@property) %> |
+                <%= link_to '戻る', properties_path %>

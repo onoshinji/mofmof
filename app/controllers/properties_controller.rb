@@ -6,6 +6,7 @@ class PropertiesController < ApplicationController
   end
 
   def show
+    @nearest_stations = @property.nearest_stations
   end
 
   def new
@@ -18,7 +19,6 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-
     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: '物件を登録しました' }
@@ -32,7 +32,7 @@ class PropertiesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @property.update(property_params) && @nearest_station.update()
+      if @property.update(property_params)
         format.html { redirect_to @property, notice: '物件をアップデートしました' }
         format.json { render :show, status: :ok, location: @property }
       else
@@ -53,9 +53,10 @@ class PropertiesController < ApplicationController
   private
     def set_property
       @property = Property.find(params[:id])
+
     end
     def property_params
       params.require(:property).permit(:name, :rent, :address, :age, :remarks,
-                                      nearest_station_attributes:[:id,:route,:station,:minutes_walk,:property_id])
+                                      nearest_stations_attributes: [:id,:route,:station,:minutes_walk,:property_id])
     end
 end
